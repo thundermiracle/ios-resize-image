@@ -7,7 +7,7 @@
     "dev": "next dev ./src",
     "build": "next build ./src",
     "start": "next start",
-    "type-check": "tsc --pretty --noEmit",
+    "type-check": "tsc --pretty --noEmit --project ./src/tsconfig.json",
     "format": "prettier --write .",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test-all": "yarn lint && yarn type-check"
@@ -26,13 +26,17 @@
   "dependencies": {
     "next": "^10.0.3",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-is": "^16.13.1",
+    "styled-components": "^5.2.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.11",
     "@types/react": "^16.9.27",
+    "@types/styled-components": "^5.1.5",
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "@typescript-eslint/parser": "^4.9.1",
+    "babel-plugin-styled-components": "^1.11.1",
     "eslint": "^7.15.0",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-react": "^7.21.5",
