@@ -40,6 +40,8 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 4px;
+    color: #257e9c;
   }
 
   a {
@@ -63,7 +65,7 @@ const theme = {
   },
 };
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <>
       <GlobalStyle />

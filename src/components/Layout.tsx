@@ -16,10 +16,6 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Logo = styled.img`
-  height: 1em;
-`;
-
 const Layout = ({
   children,
   title = 'This is the default title',
@@ -33,12 +29,21 @@ const Layout = ({
     <main>{children}</main>
 
     <footer>
+      Source Code in
       <a
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+        href="https://github.com/thundermiracle/ios-resize-image"
         target="_blank"
         rel="noopener noreferrer"
       >
-        Powered by <Logo src="/vercel.svg" alt="Vercel Logo" />
+        Github
+      </a>
+      by
+      <a
+        href="https://thundermiracle.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ThunderMiracle
       </a>
     </footer>
   </Container>
