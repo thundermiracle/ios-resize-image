@@ -27,6 +27,10 @@ const SelectImageCanvas = styled.div`
   }
 `;
 
+const SelectedImageName = styled.div`
+  color: #666;
+`;
+
 const imageFileTypes = [
   'image/apng',
   'image/bmp',
@@ -42,11 +46,13 @@ const imageFileTypes = [
 
 type ImageSelectorProps = {
   hint?: string;
+  fileName?: string;
   onFileSelected: (f: File) => void;
 };
 
 const ImageSelector = ({
   hint = 'Select Your Image',
+  fileName,
   onFileSelected,
 }: ImageSelectorProps): JSX.Element => {
   const fileInputRef = React.useRef<HTMLInputElement>();
@@ -58,20 +64,25 @@ const ImageSelector = ({
     }
   };
 
-  const handleFileChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onFileSelected(event.target.files[0]);
+  const handleFileChanged = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    await onFileSelected(event.target.files[0]);
   };
 
   return (
-    <SelectImageCanvas onClick={handleSelectFile}>
-      <div className="hint">{hint}</div>
-      <input
-        ref={fileInputRef}
-        type="file"
-        onChange={handleFileChanged}
-        accept={imageFileTypes.join(',')}
-      />
-    </SelectImageCanvas>
+    <>
+      <SelectImageCanvas onClick={handleSelectFile}>
+        <div className="hint">{hint}</div>
+        <input
+          ref={fileInputRef}
+          type="file"
+          onChange={handleFileChanged}
+          accept={imageFileTypes.join(',')}
+        />
+      </SelectImageCanvas>
+      <SelectedImageName>{fileName}</SelectedImageName>
+    </>
   );
 };
 

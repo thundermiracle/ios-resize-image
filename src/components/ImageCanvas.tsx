@@ -25,7 +25,7 @@ const ImageCanvasRoot = styled.div`
 `;
 
 type ImageCanvasProps = {
-  image?: ImageBitmap;
+  image?: ImageBitmap | HTMLImageElement;
 };
 
 const ImageCanvas = ({ image }: ImageCanvasProps): JSX.Element => {
@@ -33,13 +33,15 @@ const ImageCanvas = ({ image }: ImageCanvasProps): JSX.Element => {
 
   if (image != null) {
     const ctx = canvasRef.current.getContext('2d');
-    ctx.drawImage(image, image.width, image.height);
+
+    // as canvas' size is fixed to 200*200, we forcelly draw images in this area
+    ctx.drawImage(image, 0, 0, 200, 200);
   }
 
   return (
     <ImageCanvasRoot>
       <canvas ref={canvasRef} />
-      <div className="hint">No Image</div>
+      {image ? null : <div className="hint">Canvas No Image</div>}
     </ImageCanvasRoot>
   );
 };
