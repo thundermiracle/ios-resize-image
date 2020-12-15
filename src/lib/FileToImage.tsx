@@ -1,10 +1,10 @@
 export async function byFileReader(file: File): Promise<HTMLImageElement> {
   const img = new Image();
-  await new Promise((resolve) => {
+  await new Promise<void>((resolve) => {
     const reader = new FileReader();
     reader.onload = function (e) {
       if (typeof e.target.result === 'string') img.src = e.target.result;
-      resolve('');
+      resolve();
     };
     reader.readAsDataURL(file);
   });
@@ -28,8 +28,8 @@ async function decodeImage(url: string): Promise<HTMLImageElement> {
   const img = new Image();
   img.decoding = 'async';
   img.src = url;
-  const loaded = new Promise((resolve, reject) => {
-    img.onload = () => resolve('');
+  const loaded = new Promise<void>((resolve, reject) => {
+    img.onload = () => resolve();
     img.onerror = () => reject(Error('Image loading error.'));
   });
 

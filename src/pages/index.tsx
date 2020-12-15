@@ -4,8 +4,9 @@ import styled from 'styled-components';
 
 import Layout from '../components/Layout';
 import ImageSelector from '../components/ImageSelector';
-import ImageCanvas from '../components/ImageCanvas';
+// import ImageCanvas from '../components/ImageCanvas';
 import { byCustomizeFileToImage, byFileReader } from '../lib/FileToImage';
+import ImageAutoResizer from '../components/ImageAutoResizer';
 
 const CanvasResult = styled.div`
   margin: 2rem 0;
@@ -27,6 +28,7 @@ const CanvasResult = styled.div`
 
 export const Home = (): JSX.Element => {
   const [fileName, setFileName] = React.useState<string>();
+  const [fileType, setFileType] = React.useState<string>();
   const [
     imgByFileReader,
     setImgByFileReader,
@@ -40,8 +42,10 @@ export const Home = (): JSX.Element => {
     setImgByFileToImage,
   ] = React.useState<HTMLImageElement>();
 
-  const onFileSelected = async (file: File) => {
+  const onFileSelected = async (file?: File) => {
+    if (file == null) return;
     setFileName(file.name);
+    setFileType(file.type);
 
     const img1 = await byFileReader(file);
     setImgByFileReader(img1);
@@ -61,15 +65,21 @@ export const Home = (): JSX.Element => {
       <CanvasResult>
         <div className="image-wrapper">
           <code>FileReader.readAsDataURL</code>
-          <ImageCanvas image={imgByFileReader} />
+          {/* <ImageCanvas image={imgByFileReader} /> */}
+          <ImageAutoResizer image={imgByFileReader} imageType={fileType} />
         </div>
         <div className="image-wrapper">
           <code>createImageBitmap</code>
-          <ImageCanvas image={imgByCreateImageBitmap} />
+          {/* <ImageCanvas image={imgByCreateImageBitmap} /> */}
+          <ImageAutoResizer
+            image={imgByCreateImageBitmap}
+            imageType={fileType}
+          />
         </div>
         <div className="image-wrapper">
           <code>Customize fileToImage</code>
-          <ImageCanvas image={imgByFileToImage} />
+          {/* <ImageCanvas image={imgByFileToImage} /> */}
+          <ImageAutoResizer image={imgByFileToImage} imageType={fileType} />
         </div>
       </CanvasResult>
     </Layout>
