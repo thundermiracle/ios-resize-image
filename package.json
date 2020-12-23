@@ -4,7 +4,7 @@
   "license": "MIT",
   "version": "1.0.0",
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev ./src",
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev ./src",
     "build": "next build ./src && next export",
     "start": "next start",
     "type-check": "tsc --pretty --noEmit --project ./src/tsconfig.json",
@@ -24,6 +24,7 @@
     ]
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "next": "^10.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
