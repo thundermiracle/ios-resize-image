@@ -4,7 +4,7 @@
   "license": "MIT",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next dev ./src",
+    "dev": "NODE_OPTIONS='--inspect' next dev ./src",
     "build": "next build ./src && next export",
     "start": "next start",
     "type-check": "tsc --pretty --noEmit --project ./src/tsconfig.json",
