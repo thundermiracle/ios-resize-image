@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { validateByDecode } from '../lib/isImageValid';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { validateByDecode, validateByPattern } from '../lib/isImageValid';
 
 const SelectImageCanvas = styled.div`
   width: 200px;
@@ -70,7 +71,11 @@ const ImageSelector = ({
   ) => {
     const selectedFile = event.target.files[0];
 
-    const isValidImageFile = await validateByDecode(selectedFile);
+    // check by trying to read file to Image object
+    // const isValidImageFile = await validateByDecode(selectedFile);
+
+    // check by read file header and check by Pattern
+    const isValidImageFile = await validateByPattern(selectedFile);
     if (!isValidImageFile) {
       alert('Please upload a valid image file.');
       return;
