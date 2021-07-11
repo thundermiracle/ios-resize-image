@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { validateByDecode } from '../lib/isImageValid';
 
 const SelectImageCanvas = styled.div`
   width: 200px;
@@ -67,7 +68,15 @@ const ImageSelector = ({
   const handleFileChanged = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    await onFileSelected(event.target.files[0]);
+    const selectedFile = event.target.files[0];
+
+    const isValidImageFile = await validateByDecode(selectedFile);
+    if (!isValidImageFile) {
+      alert('Please upload a valid image file.');
+      return;
+    }
+
+    await onFileSelected(selectedFile);
   };
 
   return (
